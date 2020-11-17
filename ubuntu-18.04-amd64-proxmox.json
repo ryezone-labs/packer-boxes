@@ -1,0 +1,76 @@
+{
+  "description": "Build Ubuntu 18.04 (bionic) x86_64 Proxmox template",
+  "variables": {
+      "proxmox_url": "{{env `PROXMOX_URL`}}",
+      "proxmox_username": "{{env `PROXMOX_USERNAME`}}",
+      "proxmox_password": "{{env `PROXMOX_PASSWORD`}}",
+      "proxmox_host": "{{env `PROXMOX_HOST`}}",
+      "iso_url": "http://cdimage.ubuntu.com/ubuntu/releases/18.04/release/ubuntu-18.04.5-server-amd64.iso",
+      "iso_checksum": "sha256:8c5fc24894394035402f66f3824beb7234b757dd2b5531379cb310cedfdf0996",
+      "iso_storage_pool": "{{env `PROXMOX_ISO_STORAGE_POOL`}}",
+      "vm_name": "ubuntu1804-tmpl",
+      "template_description": "Ubuntu 18.04 x86_64 template built with packer",
+      "vm_memory": "{{env `VM_MEMORY`}}",
+      "ssh_username": "root",
+      "ssh_password": "{{env `SSH_PASSWORD`}}",
+      "network_bridge": "{{env `NETWORK_BRIDGE`}}"
+  },
+  "sensitive-variables": ["proxmox_password", "ssh_password" ],
+  "provisioners": [],
+  "builders": [
+      {
+          "type": "proxmox",
+          "proxmox_url":  "{{user `proxmox_url`}}",
+          "insecure_skip_tls_verify": true,
+          "username": "{{user `proxmox_username`}}",
+          "password": "{{user `proxmox_password`}}",
+          "vm_name": "{{user `vm_name`}}",
+          "template_description":"{{user `template_description`}}",
+          "memory": "{{user `vm_memory`}}",
+          "cores": "2",
+          "os": "l26",
+          "http_directory": "ubuntu/http",
+
+          "node": "{{user `proxmox_host`}}",
+          "network_adapters": [
+            {
+              "model": "virtio",
+              "bridge": "{{user `network_bridge`}}"
+            }
+          ],
+          "disks": [
+            {
+              "type": "scsi",
+              "disk_size": "10G",
+              "storage_pool": "local",
+              "storage_pool_type": "directory",
+              "format": "qcow2"
+            }
+          ],
+          "ssh_username": "{{user `ssh_username`}}",
+          "ssh_password": "{{user `ssh_password`}}",
+          "ssh_timeout": "15m",
+          "iso_url": "{{user `iso_url`}}",
+          "iso_checksum": "{{user `iso_checksum`}}",
+          "iso_storage_pool": "{{user `iso_storage_pool`}}",
+          "unmount_iso": true,
+          "boot_wait": "10s",
+          "boot_command": [
+            "<esc><wait>",
+            "<esc><wait>",
+            "<enter><wait>",
+            "/install/vmlinuz initrd=/install/initrd.gz",
+            " auto=true priority=critical",
+            " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/18.04/preseed.cfg",
+            "<enter>"
+          ]
+      }
+  ],
+  "post-processors": [
+    {
+      "type": "shell-local",
+      "inline_shebang": "/bin/bash -e",
+      "inline": ["qm set {{user `vm_id`}} --scsihw virtio-scsi-pci --serial0 socket --vga serial0"]
+    }
+]
+}
