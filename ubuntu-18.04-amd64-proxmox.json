@@ -5,11 +5,11 @@
       "proxmox_username": "{{env `PROXMOX_USERNAME`}}",
       "proxmox_password": "{{env `PROXMOX_PASSWORD`}}",
       "proxmox_host": "{{env `PROXMOX_HOST`}}",
-      "iso_file": "local:iso/ubuntu-18.04.5-2020.11.18-server-amd64.iso",
+      "iso_file": "local:iso/ubuntu-18.04.5-2020.11.20-6-server-amd64.iso",
       "vm_name": "ubuntu1804-tmpl",
       "template_description": "Ubuntu 18.04 x86_64 template built with packer",
       "vm_memory": "{{env `VM_MEMORY`}}",
-      "ssh_username": "root",
+      "ssh_username": "automation-user",
       "ssh_password": "{{env `SSH_PASSWORD`}}",
       "network_bridge": "{{env `NETWORK_BRIDGE`}}"
   },
@@ -23,12 +23,12 @@
           "username": "{{user `proxmox_username`}}",
           "password": "{{user `proxmox_password`}}",
           "vm_name": "{{user `vm_name`}}",
+          "qemu_agent": true,
+          "template_name": "{{user `vm_name`}}",
           "template_description":"{{user `template_description`}}",
           "memory": "{{user `vm_memory`}}",
           "cores": "2",
           "os": "l26",
-          "http_directory": "ubuntu/http",
-
           "node": "{{user `proxmox_host`}}",
           "network_adapters": [
             {
@@ -38,7 +38,7 @@
           ],
           "disks": [
             {
-              "type": "scsi",
+              "type": "virtio",
               "disk_size": "10G",
               "storage_pool": "local",
               "storage_pool_type": "directory",
@@ -50,18 +50,12 @@
           "ssh_timeout": "15m",
           "iso_file": "{{user `iso_file`}}",
           "unmount_iso": true,
-          "boot_wait": "10s",
+          "boot_wait": "5s",
           "boot_command": [
             "<esc><wait>",
             "<enter><wait>"
           ]
       }
   ],
-  "post-processors": [
-    {
-      "type": "shell-local",
-      "inline_shebang": "/bin/bash -e",
-      "inline": ["qm set {{user `vm_id`}} --scsihw virtio-scsi-pci --serial0 socket --vga serial0"]
-    }
-]
+  "post-processors": []
 }
