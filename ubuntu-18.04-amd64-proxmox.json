@@ -50,6 +50,7 @@
           "ssh_timeout": "15m",
           "iso_file": "{{user `iso_file`}}",
           "unmount_iso": true,
+          "cloud_init": true,
           "boot_wait": "5s",
           "boot_command": [
             "<esc><wait>",
