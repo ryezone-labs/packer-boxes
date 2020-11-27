@@ -5,7 +5,7 @@
       "proxmox_username": "{{env `PROXMOX_USERNAME`}}",
       "proxmox_password": "{{env `PROXMOX_PASSWORD`}}",
       "proxmox_host": "{{env `PROXMOX_HOST`}}",
-      "iso_file": "local:iso/ubuntu-18.04.5-2020.11.20-6-server-amd64.iso",
+      "iso_file": "local:iso/ubuntu-18.04.5-2020.11.26-server-amd64.iso",
       "vm_name": "ubuntu1804-tmpl",
       "template_description": "Ubuntu 18.04 x86_64 template built with packer",
       "vm_memory": "{{env `VM_MEMORY`}}",
