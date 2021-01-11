@@ -48,7 +48,7 @@
       "disks": [
         {
           "type": "virtio",
-          "disk_size": "40G",
+          "disk_size": "60G",
           "storage_pool": "local",
           "storage_pool_type": "directory",
           "format": "qcow2"
@@ -56,30 +56,18 @@
       ],
       "ssh_username": "{{user `ssh_username`}}",
       "ssh_password": "{{user `ssh_password`}}",
-      "ssh_timeout": "15m",
+      "ssh_timeout": "60m",
       "iso_file": "{{user `iso_file`}}",
       "unmount_iso": true,
       "cloud_init": true,
+      "boot":"order=virtio0;ide2;net0",
       "boot_wait": "5s",
       "http_directory": "ubuntu/http/20.04",
       "boot_command": [
-        " <wait><enter><wait>",
-        "<f6><esc>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs>",
-        "/casper/vmlinuz ",
-        "initrd=/casper/initrd ",
-        "autoinstall ",
-        "ds=nocloud-net\\;s=http://{{.HTTPIP}}:{{.HTTPPort}} ",
+        "<enter><enter><f6><esc><wait> ",
+        "autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/",
         "<enter>"
-        ]
+      ]
     }
   ],
   "post-processors": []
