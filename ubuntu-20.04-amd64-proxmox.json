@@ -5,7 +5,7 @@
       "proxmox_username": "{{env `PROXMOX_USERNAME`}}",
       "proxmox_password": "{{env `PROXMOX_PASSWORD`}}",
       "proxmox_host": "{{env `PROXMOX_HOST`}}",
-      "insecure_skip_tls_verify": true,
+      "insecure_skip_tls_verify": "true",
       "vm_id": "{{env `VM_ID`}}",
       "vm_name": "ubuntu2004-tmpl-{{user `vm_id`}}",
       "iso_file": "local:iso/ubuntu-20.04.1-live-server-amd64.iso",
