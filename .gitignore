@@ -9,3 +9,5 @@ crash.log
 
 # isos
 *.iso
+
+secrets.json
