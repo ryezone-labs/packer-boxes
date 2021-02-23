@@ -27,6 +27,7 @@ autoinstall:
     version: 2
   packages:
     - qemu-guest-agent
+    - cloud-init
   ssh:
     allow-pw: true
     authorized-keys:
@@ -54,31 +55,12 @@ autoinstall:
         type: partition
         id: partition-0
 
-      # /swap partiton
-      - device: disk-vda
-        size: 2147483648
-        wipe: superblock
-        flag: swap
-        number: 2
-        preserve: false
-        type: partition
-        id: partition-1
-      - fstype: swap
-        volume: partition-1
-        preserve: false
-        type: format
-        id: format-0
-      - device: format-0
-        path: ''
-        type: mount
-        id: mount-0
-
       # / partition
       - device: disk-vda
         size: 5368709120
         wipe: superblock
         flag: ''
-        number: 3
+        number: 2
         preserve: false
         type: partition
         id: partition-2
@@ -97,7 +79,7 @@ autoinstall:
         size: 8589934592
         wipe: superblock
         flag: ''
-        number: 4
+        number: 3
         preserve: false
         type: partition
         id: partition-3
@@ -116,7 +98,7 @@ autoinstall:
         size: 10737418240
         wipe: superblock
         flag: ''
-        number: 5
+        number: 4
         preserve: false
         type: partition
         id: partition-4
@@ -135,7 +117,7 @@ autoinstall:
         size: 5368709120
         wipe: superblock
         flag: ''
-        number: 6,
+        number: 5
         preserve: false
         type: partition
         id: partition-5
@@ -154,7 +136,7 @@ autoinstall:
         size: 32209108992
         wipe: superblock
         flag: ''
-        number: 7
+        number: 6
         preserve: false
         type: partition
         id: partition-6
