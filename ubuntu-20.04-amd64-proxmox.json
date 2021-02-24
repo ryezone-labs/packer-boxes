@@ -20,8 +20,12 @@
   "provisioners": [
     {
       "type": "shell",
+      "execute_command": "echo 'automation-user' | sudo -S env {{ .Vars }} {{ .Path }}",
       "inline": [
-        "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done"
+        "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done",
+        "rm -rf /etc/cloud/cloud.cfg.d/subiquity-disable-cloudinit-networking.cfg",
+        "rm -rf /etc/cloud/cloud.cfg.d/99-installer.cfg",
+        "cloud-init clean"
       ]
     }
   ],
