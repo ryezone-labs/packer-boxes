@@ -36,3 +36,12 @@ autoinstall:
 ```bash
 packer build -var-file=secrets.json -var-file=variables/ubuntu.20.04.json ubuntu-20.04-amd64-proxmox.json
 ```
+
+# after build is complete
+
+- Add a cloud-init device
+- Remove the cdrom.
+
+# References
+
+- https://www.burgundywall.com/post/using-cloud-init-to-set-static-ips-in-ubuntu-20-04

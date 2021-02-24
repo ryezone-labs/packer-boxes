@@ -1,0 +1,24 @@
+---
+- hosts: default
+  become: true
+  tasks:
+  - name: remove files
+    ansible.builtin.file:
+      state: absent
+      path: "{{ item }}"
+    loop:
+      - /etc/cloud/cloud.cfg.d/subiquity-disable-cloudinit-networking.cfg
+      - /etc/netplan/00-installer-config.yaml
+      - /etc/netplan/50-cloud-init.yaml
+      - /etc/udev/rules.d/70-persistent-net.rules
+      - /etc/cloud/cloud.cfg.d/99-pve.cfg
+  - name: set persistent net rules
+    ansible.builtin.copy:
+      content: SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{dev_id}=="0x0", ATTR{type}=="1", NAME="eth0"
+      dest: /etc/udev/rules.d/70-persistent-net.rules
+  - name: set cloud-init config
+    ansible.builtin.copy:
+      content: "datasource_list: [ConfigDrive, NoCloud]"
+      dest: /etc/cloud/cloud.cfg.d/99-pve.cfg
+  - name: clean cloud init
+    ansible.builtin.command: cloud-init clean
