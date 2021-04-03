@@ -8,7 +8,7 @@
       "insecure_skip_tls_verify": "true",
       "vm_id": "{{env `VM_ID`}}",
       "vm_name": "ubuntu2004-tmpl-{{user `vm_id`}}",
-      "iso_file": "local:iso/ubuntu-20.04.1-live-server-amd64.iso",
+      "iso_file": "local:iso/ubuntu-20.04.2-live-server-amd64.iso",
       "template_description": "Ubuntu 20.04 x86_64 template built with packer.  Username: {{user `ssh_username`}}",
       "vm_memory": "{{env `VM_MEMORY`}}",
       "ssh_username": "automation-user",
@@ -55,8 +55,8 @@
         {
           "type": "virtio",
           "disk_size": "60G",
-          "storage_pool": "local",
-          "storage_pool_type": "directory",
+          "storage_pool": "local-lvm",
+          "storage_pool_type": "lvm-thin",
           "format": "qcow2"
         }
       ],
