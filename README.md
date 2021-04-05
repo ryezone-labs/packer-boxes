@@ -37,6 +37,12 @@ autoinstall:
 packer build -var-file=secrets.json -var-file=variables/ubuntu.20.04.json ubuntu-20.04-amd64-proxmox.json
 ```
 
+## If using default configuration:
+
+```bash
+packer build -var-file=variables/ubuntu.20.04.json ubuntu-20.04-amd64-proxmox.json
+```
+
 # after build is complete
 
 - Add a cloud-init device
