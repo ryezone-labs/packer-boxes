@@ -54,7 +54,28 @@
       "disks": [
         {
           "type": "virtio",
-          "disk_size": "60G",
+          "disk_size": "1G",
+          "storage_pool": "local-lvm",
+          "storage_pool_type": "lvm-thin",
+          "format": "qcow2"
+        },
+        {
+          "type": "virtio",
+          "disk_size": "9G",
+          "storage_pool": "local-lvm",
+          "storage_pool_type": "lvm-thin",
+          "format": "qcow2"
+        },
+        {
+          "type": "virtio",
+          "disk_size": "20G",
+          "storage_pool": "local-lvm",
+          "storage_pool_type": "lvm-thin",
+          "format": "qcow2"
+        },
+        {
+          "type": "virtio",
+          "disk_size": "20G",
           "storage_pool": "local-lvm",
           "storage_pool_type": "lvm-thin",
           "format": "qcow2"
