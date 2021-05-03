@@ -61,7 +61,7 @@
         },
         {
           "type": "virtio",
-          "disk_size": "9G",
+          "disk_size": "6G",
           "storage_pool": "local-lvm",
           "storage_pool_type": "lvm-thin",
           "format": "qcow2"
@@ -83,6 +83,20 @@
         {
           "type": "virtio",
           "disk_size": "4G",
+          "storage_pool": "local-lvm",
+          "storage_pool_type": "lvm-thin",
+          "format": "qcow2"
+        },
+        {
+          "type": "virtio",
+          "disk_size": "2G",
+          "storage_pool": "local-lvm",
+          "storage_pool_type": "lvm-thin",
+          "format": "qcow2"
+        },
+        {
+          "type": "virtio",
+          "disk_size": "2G",
           "storage_pool": "local-lvm",
           "storage_pool_type": "lvm-thin",
           "format": "qcow2"

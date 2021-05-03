@@ -146,20 +146,20 @@ autoinstall:
         path: /var
 
       # format and mount /tmp disk
-      # - id: disk6
-      #   type: disk
-      #   path: /dev/vdg
-      #   name: disk6
+      - id: disk6
+        type: disk
+        path: /dev/vdg
+        name: disk6
 
-      # - id: disk6-tmp
-      #   type: format
-      #   fstype: ext4
-      #   volume: disk6
+      - id: disk6-tmp
+        type: format
+        fstype: ext4
+        volume: disk6
 
-      # - id: tmp
-      #   type: mount
-      #   device: disk6-tmp
-      #   path: /tmp
+      - id: tmp
+        type: mount
+        device: disk6-tmp
+        path: /tmp
 
       # format and mount /tmp disk
       # - id: disk7
