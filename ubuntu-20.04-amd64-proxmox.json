@@ -79,6 +79,20 @@
           "storage_pool": "local-lvm",
           "storage_pool_type": "lvm-thin",
           "format": "qcow2"
+        },
+        {
+          "type": "virtio",
+          "disk_size": "4G",
+          "storage_pool": "local-lvm",
+          "storage_pool_type": "lvm-thin",
+          "format": "qcow2"
+        },
+        {
+          "type": "virtio",
+          "disk_size": "2G",
+          "storage_pool": "local-lvm",
+          "storage_pool_type": "lvm-thin",
+          "format": "qcow2"
         }
       ],
       "ssh_username": "{{user `ssh_username`}}",
@@ -87,7 +101,7 @@
       "ssh_timeout": "60m",
       "iso_file": "{{user `iso_file`}}",
       "unmount_iso": true,
-      "cloud_init": true,
+      "cloud_init": false,
       "cloud_init_storage_pool": "local-lvm",
       "boot":"order=virtio0;ide2;net0",
       "boot_wait": "5s",

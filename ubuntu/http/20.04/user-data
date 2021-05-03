@@ -112,6 +112,70 @@ autoinstall:
         type: mount
         device: disk3-var-log
         path: /var/log
+
+      # format and mount /var/log/audit disk
+      - id: disk4
+        type: disk
+        path: /dev/vde
+        name: disk4
+
+      - id: disk4-var-log-audit
+        type: format
+        fstype: ext4
+        volume: disk4
+
+      - id: var-log-audit
+        type: mount
+        device: disk4-var-log-audit
+        path: /var/log/audit
+
+      # format and mount /var disk
+      - id: disk5
+        type: disk
+        path: /dev/vdf
+        name: disk5
+
+      - id: disk5-var
+        type: format
+        fstype: ext4
+        volume: disk5
+
+      - id: var
+        type: mount
+        device: disk5-var
+        path: /var
+
+      # format and mount /tmp disk
+      # - id: disk6
+      #   type: disk
+      #   path: /dev/vdg
+      #   name: disk6
+
+      # - id: disk6-tmp
+      #   type: format
+      #   fstype: ext4
+      #   volume: disk6
+
+      # - id: tmp
+      #   type: mount
+      #   device: disk6-tmp
+      #   path: /tmp
+
+      # format and mount /tmp disk
+      # - id: disk7
+      #   type: disk
+      #   path: /dev/vdh
+      #   name: disk7
+
+      # - id: disk7-home
+      #   type: format
+      #   fstype: ext4
+      #   volume: disk7
+
+      # - id: tmp
+      #   type: mount
+      #   device: disk7-home
+      #   path: /home
     swap:
       swap: 0
   version: 1
