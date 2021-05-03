@@ -161,21 +161,21 @@ autoinstall:
         device: disk6-tmp
         path: /tmp
 
-      # format and mount /tmp disk
-      # - id: disk7
-      #   type: disk
-      #   path: /dev/vdh
-      #   name: disk7
+      # format and mount /home disk
+      - id: disk7
+        type: disk
+        path: /dev/vdh
+        name: disk7
 
-      # - id: disk7-home
-      #   type: format
-      #   fstype: ext4
-      #   volume: disk7
+      - id: disk7-home
+        type: format
+        fstype: ext4
+        volume: disk7
 
-      # - id: tmp
-      #   type: mount
-      #   device: disk7-home
-      #   path: /home
+      - id: home
+        type: mount
+        device: disk7-home
+        path: /home
     swap:
       swap: 0
   version: 1
