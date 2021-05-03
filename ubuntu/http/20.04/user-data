@@ -28,6 +28,7 @@ autoinstall:
     version: 2
   packages:
     - qemu-guest-agent
+    - auditd
     - cloud-init
   late-commands:
     - echo 'automation-user ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/automation-user
